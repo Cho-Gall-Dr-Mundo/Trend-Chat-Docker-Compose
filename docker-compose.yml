@@ -88,6 +88,17 @@ services:
     networks:
       - trend-chat
 
+  # Redis
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - trend-chat
+
   # MySQL - User Service
   mysql-user:
     image: mysql:8.0
@@ -96,7 +107,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root1234
-      MYSQL_DATABASE: user
+      MYSQL_DATABASE: user_service
       MYSQL_USER: user
       MYSQL_PASSWORD: user1234
     volumes:
@@ -189,6 +200,7 @@ services:
 volumes:
   rabbitmq-data:
   kafka_data:
+  redis-data:
   mysql-user-data:
   mysql-trend-data:
   mysql-chat-data:
